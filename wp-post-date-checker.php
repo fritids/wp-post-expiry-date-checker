@@ -9,7 +9,12 @@ Author URI: http://www.rockia.com
 License: MIT
 */
 
-$timezone	=	"America/Vancouver";   //Default timezone to Vancouver, change accordingly
+$timezone		=	"America/Vancouver";   	// Default timezone to Vancouver, change accordingly
+$activeMessage	=	'';						// Text to display when the post is not expired
+$expiredMessage	=	'';						// Text to display when the post is expired
+
+
+
 
 function get_timezone_offset($remote_tz, $origin_tz = null) {
 	if($origin_tz === null) {
@@ -57,11 +62,11 @@ function check_post($content){
 			if($expired_timestamp > $current_timestamp){
 				
 				if(date("H",$expired_timestamp)<12){
-					$content = $content."Not expired <br />";
+					$content = $content.$activeMessage."<br />";
 				}
 					
 			}else{
-				$content = "Expirted"."<br />".$content;
+				$content = $expiredMessage."<br />".$content;
 			}
 		}else{
 			$content = $content."<br />Date not set"."<br />";
